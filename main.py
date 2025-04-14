@@ -8,6 +8,8 @@ import tkinter as tk
 from tkinter import ttk
 import time
 
+from Settings import Settings
+
 def send_notification(title, message):
     """
     Send a system notification.
@@ -64,13 +66,13 @@ class CountdownApp:
         self.optional_label_entry = ttk.Label(self.main_frame, text="Optional break (min):", anchor="center", font=("Arial", self.font_size))
         self.optional_label_entry.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
         self.optional_entry = ttk.Entry(self.main_frame, font=("Arial", self.font_size))
-        self.optional_entry.insert(0, "35")  # default value
+        self.optional_entry.insert(0, str(Settings.default_min_work_time))  # default value
         self.optional_entry.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
 
         self.mandatory_label_entry = ttk.Label(self.main_frame, text="Mandatory break (min):", anchor="center", font=("Arial", self.font_size))
         self.mandatory_label_entry.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
         self.mandatory_entry = ttk.Entry(self.main_frame, font=("Arial", self.font_size))
-        self.mandatory_entry.insert(0, "55")  # default value
+        self.mandatory_entry.insert(0, str(Settings.default_max_work_time))  # default value
         self.mandatory_entry.grid(row=1, column=1, sticky="nsew", padx=5, pady=5)
 
         # Row2: Mandatory break countdown label
@@ -115,6 +117,10 @@ class CountdownApp:
         # Store break times (in seconds)
         self.x_seconds = None
         self.y_seconds = None
+        
+        # icon
+        icon_base64 = Settings.icon_base64
+        self.master.iconphoto(True, tk.PhotoImage(data=icon_base64))
 
     def start_timer(self):
         try:
