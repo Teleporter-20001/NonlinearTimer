@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/opt/homebrew/Caskroom/miniconda/base/bin/python
 # -*- coding: utf-8 -*-
 
 import sys
@@ -27,6 +27,7 @@ def send_notification(title, message):
             # For macOS, using AppleScript.
             subprocess.call(['osascript', '-e',
                              f'display notification "{message}" with title "{title}"'])
+            subprocess.call(['osascript', '-e', f'display dialog "{message}" with title "{title}" buttons {{"OK"}} default button "OK"'])
         elif "linux" in current_platform:
             # For Ubuntu and other Linux distributions.
             subprocess.call(['notify-send', title, message])
@@ -40,7 +41,7 @@ def send_notification(title, message):
 class CountdownApp:
     def __init__(self, master: tk.Tk):
         self.master = master
-        master.title("Time Management Timer")
+        master.title("Corian Timer")
         
         # Set window geometry: 1/3 of screen size and centered.
         screen_width = master.winfo_screenwidth()

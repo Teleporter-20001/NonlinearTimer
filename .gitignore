@@ -1,2 +1,4 @@
 aborted/*
 __pycache__/*
+build/*
+dist/*
